@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,13 @@ public class EnterDiet extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new FoodAdapter(EnterDiet.this, dataList);
-
+//        adapter.setOnItemClickListener(new FoodAdapter.onItemClickListener(){
+//            @Override
+//            public void onItemClicked(int position, String data) {
+//                Intent intent = new Intent(this.context, EnterDiet2.class);
+//                startActivity(intent);
+//            }
+//        });
         recyclerView.setAdapter(adapter);
 
     }

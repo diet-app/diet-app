@@ -2,10 +2,13 @@ package com.sggyu.diet_app;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +26,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
     private List<Food> foodList;
     private Activity context;
     private FoodDB database;
-
+    public interface ItemClickListener{
+        void onItemClicked(View view, int position);
+    }
+//    private AdapterView.OnItemClickListener itemClickListener;
+//    public void setOnItemClickListener (AdapterView.OnItemClickListener listener){
+//        itemClickListener = listener;
+//    }
     public FoodAdapter(Activity context, List<Food> dataList)
     {
         this.context = context;
@@ -47,11 +56,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
         holder.textView.setText(data.name);
         holder.kcal.setText(data.kcal+" kcal");
         holder.foodView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Context context = v.getContext();
+                                                   Intent intent = new Intent(v.getContext(), EnterDiet2.class);
+                                                   v.getContext().startActivity(intent);
+                                               }
+                                           });
 //        holder.btEdit.setOnClickListener(new View.OnClickListener()
 //        {
 //            @Override
@@ -119,11 +130,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
         return foodList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         TextView textView,kcal;
         ImageView btEdit, btDelete;
         LinearLayout foodView;
+        ItemClickListener itemClickListener;
         public ViewHolder(@NonNull View view)
         {
             super(view);
@@ -132,6 +144,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
             foodView = view.findViewById(R.id.foodView);
 //            btEdit = view.findViewById(R.id.bt_edit);
 //            btDelete = view.findViewById(R.id.bt_delete);
+        }
+        @Override
+        public void onClick(View v){
+            this.itemClickListener.onItemClicked(v, getLayoutPosition());
         }
     }
 }

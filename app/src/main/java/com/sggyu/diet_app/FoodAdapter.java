@@ -1,21 +1,15 @@
 package com.sggyu.diet_app;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,7 +24,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
     private Activity context;
     private FoodDB database;
     private List<Food> filteredFoodList;
-
+    public static final String EXTRA_MESSAGE = "com.sggyu.dietapp.MESSAGE";
     @Override
     public Filter getFilter() {
         return new Filter(){
@@ -98,6 +92,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
                                                public void onClick(View v) {
                                                    Context context = v.getContext();
                                                    Intent intent = new Intent(v.getContext(), EnterDiet2.class);
+                                                   intent.putExtra("name",data.name);
+                                                   intent.putExtra("kcal",data.kcal);
                                                    v.getContext().startActivity(intent);
                                                }
                                            });

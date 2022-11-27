@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -19,13 +21,48 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> implements Filterable
 {
     private List<Food> foodList;
     private Activity context;
     private FoodDB database;
+    private List<Food> filteredFoodList;
+
+    @Override
+    public Filter getFilter() {
+        return new Filter(){
+
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String str = charSequence.toString();
+                if(str.isEmpty()){
+                    filteredFoodList = foodList;
+                }
+                else{
+                    List<Food> filteringList = new ArrayList<>();
+                    for (Food item : foodList){
+                        if(item.name.contains(str))
+                            filteringList.add(item);
+                    }
+                    filteredFoodList = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredFoodList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//                filteredFoodList.clear();
+//                filteredFoodList.addAll((List)filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public interface ItemClickListener{
         void onItemClicked(View view, int position);
     }
@@ -37,6 +74,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
     {
         this.context = context;
         this.foodList = dataList;
+        this.filteredFoodList = dataList;
         notifyDataSetChanged();
     }
 
@@ -51,7 +89,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull final FoodAdapter.ViewHolder holder, int position)
     {
-        final Food data = foodList.get(position);
+        final Food data = filteredFoodList.get(position);
         database = FoodDB.getInstance(context);
         holder.textView.setText(data.name);
         holder.kcal.setText(data.kcal+" kcal");
@@ -127,7 +165,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>
     @Override
     public int getItemCount()
     {
-        return foodList.size();
+        return filteredFoodList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener

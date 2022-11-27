@@ -11,4 +11,5 @@ public class EnterDiet2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_diet2);
     }
+
 }

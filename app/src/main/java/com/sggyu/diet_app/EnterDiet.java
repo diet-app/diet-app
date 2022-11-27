@@ -7,6 +7,8 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -21,7 +23,6 @@ public class EnterDiet extends AppCompatActivity {
     SearchView searchView;
 //    Button btAdd, btReset;
     RecyclerView recyclerView;
-
     List<Food> dataList = new ArrayList<>();
     FoodDB database;
     FoodAdapter adapter;
@@ -33,6 +34,19 @@ public class EnterDiet extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
 //        btAdd = findViewById(R.id.bt_add);
 //        btReset = findViewById(R.id.bt_reset);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
         recyclerView = findViewById(R.id.recycler_view);
 
         database = FoodDB.getInstance(this);
@@ -50,6 +64,6 @@ public class EnterDiet extends AppCompatActivity {
 //            }
 //        });
         recyclerView.setAdapter(adapter);
-
+        searchView.setIconifiedByDefault(false);
     }
 }

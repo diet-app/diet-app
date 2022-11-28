@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Diet-app</string>
+    <string name="diet_manage">Diet Manager</string>
 </resources>

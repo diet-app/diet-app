@@ -1,13 +1,22 @@
 package com.sggyu.diet_app;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +46,7 @@ public class MainActivity extends Activity {
         calendarView = findViewById(R.id.calendarView);
         dietTextView = findViewById(R.id.diettextView);
         listView = findViewById(R.id.listView1);
-        
+
         dietTextView.setVisibility(View.INVISIBLE);
         listView.setVisibility(View.INVISIBLE);
 
@@ -57,6 +66,19 @@ public class MainActivity extends Activity {
             }
         });
 
+        // Create foodDB
+        FoodDB db = FoodDB.getInstance(this);
+        FoodDAO foodDao = db.foodDao();
+        // read from food asset
+        try {
+            List<Food> foodList = readFromAssets("food.txt");
+            for(Food food :foodList){
+                foodDao.insertAll(food);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     // 날짜마다 식단 확인해서 리스트로 변경
     public void checkDayArr(int year, int month, int day){
@@ -98,12 +120,30 @@ public class MainActivity extends Activity {
                     }
                 });
                 AlertDialog ad = aDialog.create();
-                
+
                 ad.show();
             }
         });
     }
 
+
+    private List<Food> readFromAssets(String filename) throws Exception {
+        List<Food> foodList = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(filename)));
+        String[] line;
+        String tmp;
+        while((tmp = reader.readLine()) != null){
+            line = tmp.split("\t");
+            Food food = new Food(Integer.parseInt(line[0]),line[1],line[2]);
+            foodList.add(food);
+        }
+        reader.close();
+        return foodList;
+    }
+    public void enterDiet(View view){
+        Intent intent = new Intent(this, EnterDiet.class);
+        startActivity(intent);
+    }
 
 }
 

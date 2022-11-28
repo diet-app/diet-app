@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Diet-app</string>
     <string name="diet_manage">Diet Manager</string>
+    <string name="diet_analysis_button">> 식단 분석</string>
 </resources>

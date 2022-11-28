@@ -8,8 +8,21 @@
     android:id="@+id/popup"
     tools:context=".MainActivity">
 
-    <!-- 타이틀바 -->
-    <!-- //end 타이틀바 -->
+<!--    &lt;!&ndash; 타이틀바 &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <TextView-->
+<!--            android:id="@+id/dietpopuptxt"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@color/main_white"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@color/main_blue"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="53dp" />-->
+<!--    </LinearLayout>-->
+<!--    &lt;!&ndash; //end 타이틀바 &ndash;&gt;-->
 
     <!-- Notice -->
     <LinearLayout

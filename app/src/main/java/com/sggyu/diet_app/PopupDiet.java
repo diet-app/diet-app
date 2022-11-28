@@ -3,6 +3,7 @@ package com.sggyu.diet_app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -23,10 +24,14 @@ public class PopupDiet extends Activity {
         //dietPopupTxtView = findViewById(R.id.dietpopuptxt);
 
     }
-//    public static void setTitleText(int id){
+//    public static TextView setTitleText(int id){
 //
 //        dietPopupTxtView.setText(String.format("식단%d", id+1));
+//        dietPopupTxtView.setPadding(20, 30, 20, 20);
+//        dietPopupTxtView.setGravity(Gravity.LEFT);
+//        dietPopupTxtView.setTextSize(18);
 //
+//        return dietPopupTxtView;
 //    }
     //확인 버튼 클릭
     public void mOnClose(View v){

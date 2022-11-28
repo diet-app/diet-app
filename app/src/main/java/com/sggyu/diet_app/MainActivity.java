@@ -10,7 +10,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 
 import java.io.BufferedReader;
@@ -113,7 +115,14 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
                 int i = Long.valueOf(Optional.ofNullable(id).orElse(0L)).intValue();
                 //PopupDiet.setTitleText(i);
-                aDialog.setTitle(String.format("식단%d",i+1));
+                TextView title = new TextView(MainActivity.this);
+                title.setText(String.format("식단%d", id+1));
+                title.setPadding(20, 40, 20, 30);
+                title.setGravity(Gravity.CENTER);
+                title.setBackgroundColor(Color.parseColor("#566270"));
+                title.setTextColor(Color.parseColor("#FFFFF3"));
+                title.setTextSize(16);
+                aDialog.setCustomTitle(title);
                 aDialog.setView(layout); //dialog.xml 파일을 뷰로 셋팅
                 aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

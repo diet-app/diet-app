@@ -8,44 +8,145 @@
     android:id="@+id/popup"
     tools:context=".MainActivity">
 
-<!--    &lt;!&ndash; 타이틀바 &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--        <TextView-->
-<!--            android:id="@+id/dietpopuptxt"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textColor="@color/main_white"-->
-<!--            android:gravity="center"-->
-<!--            android:background="@color/main_blue"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="53dp" />-->
-<!--    </LinearLayout>-->
-<!--    &lt;!&ndash; //end 타이틀바 &ndash;&gt;-->
-
-    <!-- Notice -->
+    <!-- 타이틀바 -->
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:orientation="vertical"
-        android:padding="24dp">
-
+        android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/txtText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:alpha="0.87"
+            android:id = "@+id/TitleText"
+            android:textSize="20sp"
+            android:textColor="@color/main_white"
             android:gravity="center"
-            android:textColor="#000"
-            android:textSize="15sp" />
+            android:background="@color/main_blue"
+            android:layout_width="match_parent"
+            android:layout_height="53dp" />
     </LinearLayout>
-    <!-- Notice -->
+    <!-- //end 타이틀바 -->
 
-    <View
-        android:background="#66bdbdbd"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="320sp"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/dietPhotoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_photo_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietPhotoContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/dietNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_name_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietNameContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/dietNumTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_num_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietNumContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/dietEvalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_eval_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietEvalContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/dietDateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_date_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietDateContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/dietPlaceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_place_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietPlaceContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/dietCalTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/diet_cal_title"
+                android:padding="4dp"
+                />
+            <TextView
+                android:id="@+id/dietCalContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:background="@color/main_white"
+                android:padding="5dp"/>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

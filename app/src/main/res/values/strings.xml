@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Diet-app</string>
     <string name="diet_manage">Diet Manager</string>
+    <string name="enter_diet">식단 추가</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

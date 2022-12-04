@@ -3,4 +3,8 @@
     <string name="diet_manage">Diet Manager</string>
     <string name="enter_diet">식단 추가</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="kcal">kcal</string>
+    <string name="enter_photo">enter_photo</string>
+    <string name="empty">empty</string>
+    <string name="food_name_kor">음식명</string>
 </resources>

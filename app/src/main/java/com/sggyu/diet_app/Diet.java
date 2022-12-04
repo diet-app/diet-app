@@ -27,6 +27,12 @@ public class Diet {
     @ColumnInfo(name = "place")
     public String place;
 
+    @ColumnInfo(name = "latitude")
+    public double latitude;
+
+    @ColumnInfo(name = "longitude")
+    public double longitude;
+
     Diet(int id, String name, int num, String date, String photo, String eval, String place){
         this.did = id;
         this.num = num;

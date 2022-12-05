@@ -111,7 +111,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="25dp"
                     android:text="수량"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +121,7 @@
                 <EditText
                     android:id="@+id/editTextNumber2"
                     android:layout_width="274dp"
-                    android:layout_height="46dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="20dp"
                     android:ems="10"
                     android:inputType="number"
@@ -130,6 +130,36 @@
                     app:layout_constraintStart_toEndOf="@+id/textView5"
                     app:layout_constraintTop_toTopOf="parent" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLine"
+                    android:layout_width="359dp"
+                    android:layout_height="69dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="31dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="평가"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -165,14 +195,13 @@
                 <EditText
                     android:id="@+id/location"
                     android:layout_width="341dp"
-                    android:layout_height="41dp"
+                    android:layout_height="48dp"
                     android:layout_marginBottom="4dp"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="식사 장소"
                     app:layout_constraintBottom_toTopOf="@+id/map"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,7 +35,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,12 +52,16 @@ public class EnterDiet2 extends AppCompatActivity implements OnMapReadyCallback{
     List<Address> addressList = new ArrayList<>();
     double lat=0, lon=0;
     GoogleMap googleMap;
+    String name;
+    EditText numView,evalView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_diet2);
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
+        name = intent.getStringExtra("name");
+        numView = findViewById(R.id.editTextNumber2);
+        evalView = findViewById(R.id.editTextTextMultiLine);
         String kcal = intent.getStringExtra("kcal");
         TextView textView4 = findViewById(R.id.textView4);
         TextView textView3 = findViewById(R.id.textView3);
@@ -151,8 +158,15 @@ public class EnterDiet2 extends AppCompatActivity implements OnMapReadyCallback{
     }
 
     public void enterClick(View view){
-        List<Diet> dietInfo = dietDao.getAll();
-        Log.d("Time : ",String.valueOf(timePicker.getHour())+":"+String.valueOf(timePicker.getMinute()));
+        Date current = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        String currentDate = format.format(current);
+        String currentTime = timePicker.getHour()+":"+timePicker.getMinute();
+        Log.d("Time : ",currentDate+" "+currentTime);
+        String eval = evalView.getText().toString();
+        name = getIntent().getStringExtra("name");
+        Diet myDiet = new Diet(dietDao.getCnt()+1,name,Integer.parseInt(numView.getText().toString()),currentDate+" "+currentTime,filename+".png",eval,location.getText().toString(),lat,lon);
+        dietDao.insertAll(myDiet);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

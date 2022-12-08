@@ -7,4 +7,9 @@
     <string name="enter_photo">enter_photo</string>
     <string name="empty">empty</string>
     <string name="food_name_kor">음식명</string>
+    <string name="diet_cnt">수량</string>
+    <string name="diet_eval">평가</string>
+    <string name="diet_place">식사 장소</string>
+    <string name="enter_diet_place">식사장소를 입력하세요.</string>
+    <string name="_1">1</string>
 </resources>

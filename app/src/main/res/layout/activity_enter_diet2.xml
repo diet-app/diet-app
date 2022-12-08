@@ -112,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:text="수량"
+                    android:text="@string/diet_cnt"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -124,11 +124,13 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="20dp"
                     android:ems="10"
+                    android:hint="@string/_1"
                     android:inputType="number"
                     android:textAlignment="textEnd"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:autofillHints="" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,7 +149,8 @@
                     android:inputType="textMultiLine"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView6"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    android:autofillHints="" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -156,7 +159,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="7dp"
-                    android:text="평가"
+                    android:text="@string/diet_eval"
                     app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -187,7 +190,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="8dp"
-                    android:text="TextView"
+                    android:text="@string/diet_place"
                     app:layout_constraintBottom_toTopOf="@+id/location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -197,10 +200,12 @@
                     android:layout_width="341dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="4dp"
+                    android:autofillHints=""
                     android:ems="10"
+                    android:hint="@string/enter_diet_place"
                     android:inputType="text"
+                    android:textColorHint="#78909C"
                     app:layout_constraintBottom_toTopOf="@+id/map"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 

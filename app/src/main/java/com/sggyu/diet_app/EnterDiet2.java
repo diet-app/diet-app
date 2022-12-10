@@ -132,8 +132,6 @@ public class EnterDiet2 extends AppCompatActivity implements OnMapReadyCallback{
                 instream.close();   // 스트림 닫아주기
                 saveBitmapToJpeg(imgBitmap);
                 Log.d("Uri: ", getCacheDir() + "/" + uri.getEncodedPath());
-
-                uri = null;
             } catch (IOException e) {
                 e.printStackTrace();
             }

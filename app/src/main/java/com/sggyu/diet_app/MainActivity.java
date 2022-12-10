@@ -111,7 +111,9 @@ public class MainActivity extends Activity {
             totalKcal += Double.parseDouble(curFood.kcal)*curDiet.num;
         }
 
-        totalKcalTextView.setText("총 칼로리 : " + totalKcal);
+        String total = String.format("%.1f",totalKcal);
+
+        totalKcalTextView.setText("총 칼로리 : " + total + "kcal");
 
 
         ArrayAdapter<String> adapter;

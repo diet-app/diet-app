@@ -78,7 +78,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="199dp"
+        android:layout_marginEnd="237dp"
         android:layout_marginBottom="215dp"
         android:background="@color/main_beige"
         android:text=""
@@ -101,7 +101,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="215dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/main_blue"
         android:text="@string/diet_total_cal" />
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="kcal">kcal</string>
+    <string name="enter_photo">enter_photo</string>
+    <string name="empty">empty</string>
+    <string name="food_name_kor">음식명</string>
+    <string name="diet_place">식사 장소</string>
+</resources>

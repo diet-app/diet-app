@@ -16,6 +16,9 @@ public interface DietDAO {
     @Query("SELECT * FROM diet WHERE date= :str")
     List<Diet> getByDate(String str);
 
+    @Query("SELECT count(*) FROM diet")
+    int getCnt();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Diet... diets);
 

@@ -71,7 +71,7 @@
 
     <TextView
         android:id="@+id/diettextView"
-        android:layout_width="188dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -88,10 +88,22 @@
     <View
         android:id="@+id/View1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="252dp"
         android:background="#000000" />
+
+    <TextView
+        android:id="@+id/totaltextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="215dp"
+        android:textSize="18sp"
+        android:textColor="@color/main_blue"
+        android:text="@string/diet_total_cal" />
 
 
 </RelativeLayout>

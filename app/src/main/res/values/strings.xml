@@ -12,4 +12,13 @@
     <string name="diet_place">식사 장소</string>
     <string name="enter_diet_place">식사장소를 입력하세요.</string>
     <string name="_1">1</string>
+    <string name="diet_analysis_button">식단 분석</string>
+    <string name="diet_photo_title">음식 사진</string>
+    <string name="diet_name_title">음식 이름</string>
+    <string name="diet_num_title">음식 수량</string>
+    <string name="diet_eval_title">음식 소감</string>
+    <string name="diet_date_title">식사 시간</string>
+    <string name="diet_place_title">식사 위치</string>
+    <string name="diet_cal_title">칼로리 량</string>
+    <string name="diet_total_cal">총 칼로리</string>
 </resources>

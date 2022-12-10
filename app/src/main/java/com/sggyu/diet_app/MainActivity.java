@@ -18,6 +18,8 @@ import android.view.View;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -39,7 +42,9 @@ public class MainActivity extends Activity {
     public CalendarView calendarView;
     public ListView listView;
     public TextView dietTextView;
+    public TextView totalKcalTextView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,9 +53,8 @@ public class MainActivity extends Activity {
         calendarView = findViewById(R.id.calendarView);
         dietTextView = findViewById(R.id.diettextView);
         listView = findViewById(R.id.listView1);
+        totalKcalTextView = findViewById(R.id.totaltextView);
 
-        dietTextView.setVisibility(View.INVISIBLE);
-        listView.setVisibility(View.INVISIBLE);
 
         //캘린더에서 날짜 눌렀을때 식단 listView 띄우기
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
@@ -58,19 +62,20 @@ public class MainActivity extends Activity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
             {
-                dietTextView.setVisibility(View.VISIBLE);
                 dietTextView.setText(String.format("  %d년 %d월 %d일", year, month + 1, dayOfMonth));
 
                 checkDayArr(year, month, dayOfMonth);
-
-                listView.setVisibility(View.VISIBLE);
-
             }
         });
+
+        Calendar calendar = Calendar.getInstance();
+        dietTextView.setText(String.format("  %d년 %d월 %d일  ", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)));
+        checkDayArr(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         // Create foodDB
         FoodDB db = FoodDB.getInstance(this);
         FoodDAO foodDao = db.foodDao();
+
         // read from food asset
         try {
             List<Food> foodList = readFromAssets("food.txt");
@@ -86,16 +91,28 @@ public class MainActivity extends Activity {
     public void checkDayArr(int year, int month, int day){
 
         String date;
-        date = Integer.toString(year) + Integer.toString(month+1) + Integer.toString(day);
+        date = year + "/" + (month+1) + "/" + day;
 
         FoodDB db = FoodDB.getInstance(this);
+        FoodDAO foodDAO = db.foodDao();
+
         DietDAO dietDao = db.dietDAO();
         List<Diet> dietInfo = dietDao.getByDate(date);
 
+
+        double totalKcal = 0;
+
         List<String> stringList = new ArrayList<>();
-        for(int i=0; i<2; i++){
-            stringList.add("식단" + Integer.toString(i+1));
+        for(int i=0; i<dietInfo.size(); i++){
+            stringList.add("식단" + (i+1));
+            Diet curDiet = dietInfo.get(i);
+            List<Food> FoodInfo = foodDAO.getByName(curDiet.name);
+            Food curFood = FoodInfo.get(0);
+            totalKcal += Double.parseDouble(curFood.kcal)*curDiet.num;
         }
+
+        totalKcalTextView.setText("총 칼로리 : " + totalKcal);
+
 
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<>(this, R.layout.main_listview, stringList);
@@ -107,37 +124,15 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 CustomDialog dialog = new CustomDialog(MainActivity.this);
+                dialog.setOwnerActivity(MainActivity.this);
                 dialog.show();
                 int i = Long.valueOf(Optional.ofNullable(id).orElse(0L)).intValue();
-                dialog.setContent(i, db, date);
 
-//                Context mContext = getApplicationContext();
-//                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-//
-//                //R.layout.diet_popup xml 파일명이고  R.id.popup은 보여줄 레이아웃 아이디
-//                View layout = inflater.inflate(R.layout.diet_popup,(ViewGroup) findViewById(R.id.popup));
-//                AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
-//                int i = Long.valueOf(Optional.ofNullable(id).orElse(0L)).intValue();
-//                TextView title = new TextView(MainActivity.this);
-//                title.setText(String.format("식단%d", id+1));
-//                title.setPadding(20, 40, 20, 30);
-//                title.setGravity(Gravity.CENTER);
-//                title.setBackgroundColor(Color.parseColor("#566270"));
-//                title.setTextColor(Color.parseColor("#FFFFF3"));
-//                title.setTextSize(16);
-//                aDialog.setCustomTitle(title);
-//                aDialog.setView(layout); //diet_popup.xml 파일을 뷰로 셋팅
-//
-//
-//                aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
-//                AlertDialog ad = aDialog.create();
-//
-//
-//
-//                ad.show();
+                try{
+                    dialog.setContent(i, db, date);
+                }catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "이미지 사진 없음", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

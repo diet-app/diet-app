@@ -13,7 +13,7 @@ public interface DietDAO {
     @Query("SELECT * FROM diet")
     List<Diet> getAll();
 
-    @Query("SELECT * FROM diet WHERE date= :str")
+    @Query("SELECT * FROM diet WHERE date LIKE :str || '%'")
     List<Diet> getByDate(String str);
 
     @Query("SELECT count(*) FROM diet")

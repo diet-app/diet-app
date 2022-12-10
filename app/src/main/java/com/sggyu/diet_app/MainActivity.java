@@ -10,7 +10,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 
 import java.io.BufferedReader;
@@ -84,20 +86,19 @@ public class MainActivity extends Activity {
     public void checkDayArr(int year, int month, int day){
 
         String date;
-        String[] arr;
-
         date = Integer.toString(year) + Integer.toString(month+1) + Integer.toString(day);
 
-        if (date.equals("20221128")){
-            //@Query("SELECT COUNT(*) FROM food where date = %s")
-            //arr
-            arr = new String[]{"식단1", "식단2"};
+        FoodDB db = FoodDB.getInstance(this);
+        DietDAO dietDao = db.dietDAO();
+        List<Diet> dietInfo = dietDao.getByDate(date);
+
+        List<String> stringList = new ArrayList<>();
+        for(int i=0; i<2; i++){
+            stringList.add("식단" + Integer.toString(i+1));
         }
-        else{
-            arr =new String[]{""};
-        }
+
         ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<>(this, R.layout.main_listview, arr);
+        adapter = new ArrayAdapter<>(this, R.layout.main_listview, stringList);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,23 +106,38 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Context mContext = getApplicationContext();
-                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-
-                //R.layout.dialog는 xml 파일명이고  R.id.popup은 보여줄 레이아웃 아이디
-                View layout = inflater.inflate(R.layout.diet_popup,(ViewGroup) findViewById(R.id.popup));
-                AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
+                CustomDialog dialog = new CustomDialog(MainActivity.this);
+                dialog.show();
                 int i = Long.valueOf(Optional.ofNullable(id).orElse(0L)).intValue();
-                //PopupDiet.setTitleText(i);
-                aDialog.setTitle(String.format("식단%d",i+1));
-                aDialog.setView(layout); //dialog.xml 파일을 뷰로 셋팅
-                aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                AlertDialog ad = aDialog.create();
+                dialog.setContent(i, db, date);
 
-                ad.show();
+//                Context mContext = getApplicationContext();
+//                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+//
+//                //R.layout.diet_popup xml 파일명이고  R.id.popup은 보여줄 레이아웃 아이디
+//                View layout = inflater.inflate(R.layout.diet_popup,(ViewGroup) findViewById(R.id.popup));
+//                AlertDialog.Builder aDialog = new AlertDialog.Builder(MainActivity.this);
+//                int i = Long.valueOf(Optional.ofNullable(id).orElse(0L)).intValue();
+//                TextView title = new TextView(MainActivity.this);
+//                title.setText(String.format("식단%d", id+1));
+//                title.setPadding(20, 40, 20, 30);
+//                title.setGravity(Gravity.CENTER);
+//                title.setBackgroundColor(Color.parseColor("#566270"));
+//                title.setTextColor(Color.parseColor("#FFFFF3"));
+//                title.setTextSize(16);
+//                aDialog.setCustomTitle(title);
+//                aDialog.setView(layout); //diet_popup.xml 파일을 뷰로 셋팅
+//
+//
+//                aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//                AlertDialog ad = aDialog.create();
+//
+//
+//
+//                ad.show();
             }
         });
     }

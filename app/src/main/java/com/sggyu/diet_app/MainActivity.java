@@ -1,29 +1,10 @@
 package com.sggyu.diet_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.annotation.NonNull;
-
-import android.content.Intent;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -31,10 +12,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import androidx.annotation.NonNull;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
-import java.util.zip.Inflater;
 
 
 public class MainActivity extends Activity {
@@ -43,7 +31,7 @@ public class MainActivity extends Activity {
     public ListView listView;
     public TextView dietTextView;
     public TextView totalKcalTextView;
-
+    static String currentDate;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +42,10 @@ public class MainActivity extends Activity {
         dietTextView = findViewById(R.id.diettextView);
         listView = findViewById(R.id.listView1);
         totalKcalTextView = findViewById(R.id.totaltextView);
-
+        // 오늘 날짜로 설정
+        Date current = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        currentDate = format.format(current);
 
         //캘린더에서 날짜 눌렀을때 식단 listView 띄우기
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
@@ -63,7 +54,7 @@ public class MainActivity extends Activity {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
             {
                 dietTextView.setText(String.format("  %d년 %d월 %d일", year, month + 1, dayOfMonth));
-
+                currentDate = year+"/"+(month+1)+"/"+dayOfMonth;
                 checkDayArr(year, month, dayOfMonth);
             }
         });

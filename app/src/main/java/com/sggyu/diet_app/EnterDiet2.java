@@ -22,7 +22,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,10 +34,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -158,14 +154,15 @@ public class EnterDiet2 extends AppCompatActivity implements OnMapReadyCallback{
     }
 
     public void enterClick(View view){
-        Date current = Calendar.getInstance().getTime();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
-        String currentDate = format.format(current);
+//        Date current = Calendar.getInstance().getTime();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+//        String currentDate = format.format(current);
+
         String currentTime = timePicker.getHour()+":"+timePicker.getMinute();
-        Log.d("Time : ",currentDate+" "+currentTime);
+        Log.d("Time : ",MainActivity.currentDate+" "+currentTime);
         String eval = evalView.getText().toString();
         name = getIntent().getStringExtra("name");
-        Diet myDiet = new Diet(dietDao.getCnt()+1,name,Integer.parseInt(numView.getText().toString()),currentDate+" "+currentTime,filename+".png",eval,location.getText().toString(),lat,lon);
+        Diet myDiet = new Diet(dietDao.getCnt()+1,name,Integer.parseInt(numView.getText().toString()),MainActivity.currentDate+" "+currentTime,filename+".png",eval,location.getText().toString(),lat,lon);
         dietDao.insertAll(myDiet);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

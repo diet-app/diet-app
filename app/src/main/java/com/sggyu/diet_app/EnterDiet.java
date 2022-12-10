@@ -1,5 +1,6 @@
 package com.sggyu.diet_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.SearchView;
 
@@ -17,11 +18,11 @@ public class EnterDiet extends AppCompatActivity {
     List<Food> dataList = new ArrayList<>();
     FoodDB database;
     FoodAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_diet);
-
         searchView = findViewById(R.id.searchView);
 //        btAdd = findViewById(R.id.bt_add);
 //        btReset = findViewById(R.id.bt_reset);

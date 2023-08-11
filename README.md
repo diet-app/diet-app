@@ -2,7 +2,10 @@
 식단을 관리하는 프로그램 구현
 - 식사 입력
 - 식사 분석
-  
+------
+### 시연 영상
+https://www.youtube.com/watch?v=nIIEWVNtQ4o&feature=youtu.be
+
 ### 앱 아이콘, 실행화면
 <img width="60%" height = "30%" src="https://github.com/diet-app/diet-app/assets/94947761/5efec53e-3d39-4a83-9135-325b8d000765"/>
 
